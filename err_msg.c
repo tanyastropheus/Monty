@@ -7,22 +7,37 @@
  * Return: Void
  */
 
-void err_msg(char code, char *s, unsigned int line_number)
+void err_msg(char code, char *spec, unsigned int line_number)
 {
 	switch(code) {
 	case 'F':
 		printf("Usage: monty file\n");
 		exit(EXIT_FAILURE);
 	case 'O':
-		printf("Error: Can't open file %s\n", argv[1]); /* need to check argv[1] passing */
+		printf("Error: Can't open file %s\n", spec); /* need to check argv[1] passing
+							      * seems okay upon first test
+							      */
 		exit(EXIT_FAILURE);
 	case 'B':
-		printf("L%u: unknown instruction %s\n", line_number, op_code); /* need to check op_code */
+		printf("L%u: unknown instruction %s\n", line_number, spec); /* need more testing */
 		exit(EXIT_FAILURE);
-	case 'N':
+	case 'I':
 		printf("L%u: usage: push integer\n", line_number);
 		exit(EXIT_FAILURE);
 	case 'M':
 		printf("Error: malloc failed\n");
 		exit(EXIT_FAILURE);
+	case 'R':
+		printf("L%u: can't pint, stack empty\n", line_number);
+		exit(EXIT_FAILURE);
+	case 'P':
+		printf("L%u: can't pop an empty stack\n", line_number);
+		exit(EXIT_FAILURE);
+	case 'S':
+		printf("L%u: can't swap, stack too short\n", line_number);
+		exit(EXIT_FAILURE);
+	case 'A':
+		printf("L%u: can't add, stack too short\n", line_number);
+		exit(EXIT_FAILURE);
+	}
 }
