@@ -58,3 +58,48 @@ void op_pint(stack_t **stack, unsigned int line_number)
 	else
 		printf("%d\n", (*stack)->n);
 }
+
+/**
+ * op_pop - removes the top element of the stack
+ * @stack: address to the pointer to the top of the stack, or the head node
+ * @line_number: line number of the bytecode file
+ * Return: Void
+ */
+
+void op_pop(stack_t **stack, unsigned int line_number)
+{
+	stack_t *temp;
+
+	if (!*stack) /* if the stack is empty */
+		err_msg('P', NULL, line_number);
+	else
+	{
+		temp = *stack;
+		*stack = (*stack)->next;
+		if (*stack) /* if there is more than one element on stack */
+			(*stack)->prev = NULL;
+		free(temp);
+	}
+}
+
+/**
+ * op_swap - swaps the top two elements of the stack
+ * @stack: address to the pointer to the top of the stack, or the head node
+ * @line_number: line number of the bytecode file
+ * Return: Void
+ */
+
+void op_swap(stack_t **stack, unsigned int line_number)
+{
+	int num_1, num_2;
+
+	if (!(*stack)->n || ! *stack)
+		err_msg('S', NULL, line_number);
+	else
+	{
+		num_1 = (*stack)->n;
+		num_2 = (*stack)->next->n;
+		(*stack)->n = num_2;
+		(*stack)->next->n = num_1;
+	}
+}
