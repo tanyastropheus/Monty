@@ -22,7 +22,6 @@ void op_push(stack_t **stack, unsigned int line_number)
 	if (*stack != NULL) /* if the list is not empty */
 		(*stack)->prev = new;
 	*stack = new;
-	return;
 }
 
 /**
@@ -43,4 +42,19 @@ void op_pall(stack_t **stack, unsigned int line_number)
 		printf("%d\n", temp->n);
 		temp = temp->next;
 	}
+}
+
+/**
+ * op_pint - prints the value at the top of the stack, followed by a new line.
+ * @stack: address to the pointer to the top of the stack, or the head node
+ * @line_number: line number of the bytecode file
+ * Return: Void
+ */
+
+void op_pint(stack_t **stack, unsigned int line_number)
+{
+	if (!*stack) /* if the stack is empty */
+		err_msg('R', NULL, line_number);
+	else
+		printf("%d\n", (*stack)->n);
 }
