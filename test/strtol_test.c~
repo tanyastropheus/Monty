@@ -1,0 +1,35 @@
+#include "monty.h"
+global_t global = {NULL, NULL};
+
+int main(int ac, char *av[])
+{
+	FILE *fd;
+	char *line;
+	ssize_t r_count;
+	size_t size;
+	char *op_code;
+	unsigned int line_number;
+	void (*fp)(stack_t **stack, unsigned int line_number);
+
+	fd = fopen(av[1], "r");
+
+	line_number = 1;
+	while ((r_count = getline(&line, &size, fd)) != -1)
+	{
+		op_code = strtok(line, " "); /* 1st time, returns ptr to opcode */
+		if (strcmp(op_code, "\n") == 0) /* if it's an empty line */
+			;
+		else
+		{
+			fp = get_op(op_code);
+			if (fp == NULL)  /* bytecode invalid */
+				err_msg('B', op_code, line_number);
+		}
+		line_number++;
+	}
+
+	return (0);  /* getline returns -1 on the first run
+		      * while loop doesn't execute
+		      * means the file is empty
+		      */
+}
