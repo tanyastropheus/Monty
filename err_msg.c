@@ -1,25 +1,24 @@
 #include "monty.h"
 /**
- * err_msg - print out corresponding error messages & carry out resulting action
+ * err_msg - print out error messages & execute the resulting action
  * @code: denotes different error cases
- * @s: message specific to the error case
+ * @spec: message specific to the error case
  * @line_number: denotes at which bytecode line the error is encountered
  * Return: Void
  */
 
 void err_msg(char code, char *spec, unsigned int line_number)
 {
-	switch(code) {
+	switch (code)
+	{
 	case 'F':
 		printf("Usage: monty file\n");
 		exit(EXIT_FAILURE);
 	case 'O':
-		printf("Error: Can't open file %s\n", spec); /* need to check argv[1] passing
-							      * seems okay upon first test
-							      */
+		printf("Error: Can't open file %s\n", spec);
 		exit(EXIT_FAILURE);
 	case 'B':
-		printf("L%u: unknown instruction %s\n", line_number, spec); /* need more testing */
+		printf("L%u: unknown instruction %s\n", line_number, spec);
 		exit(EXIT_FAILURE);
 	case 'I':
 		printf("L%u: usage: push integer\n", line_number);

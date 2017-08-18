@@ -15,9 +15,9 @@
  */
 typedef struct stack_s
 {
-        int n;
-        struct stack_s *prev;
-        struct stack_s *next;
+	int n;
+	struct stack_s *prev;
+	struct stack_s *next;
 } stack_t;
 
 /**
@@ -30,14 +30,14 @@ typedef struct stack_s
  */
 typedef struct instruction_s
 {
-        char *opcode;
-        void (*f)(stack_t **stack, unsigned int line_number);
+	char *opcode;
+	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
 /**
  * struct global_s - variables set as global
  * @line: pointer to the buffer allocated by getline()
- *
+ * @stack: doubly linked list that serves as the stack
  * Description: global variables for all functions to access
  */
 typedef struct global_s
@@ -49,15 +49,18 @@ typedef struct global_s
 	stack_t *stack;
 } global_t;
 
-/* this creates a "prototype" of the extern var of type global_t with the name "global" */
-extern global_t global; /* since it's global, no need to create a ptr to the
-			 * struct to pass between functions
-			 */
+extern global_t global;  /**
+			  * this creates a prototype of the extern var, of the
+			  * type global_t with the name "global
+			  * since it's global, there is no need to create a ptr
+			  * to the struct to pass b/w functions
+			  */
 
 void err_msg(char code, char *spec, unsigned int line_number);
 void (*get_op(char *s))(stack_t **stack, unsigned int line_number);
 stack_t *create_new_node(unsigned int line_number);
 void op_push(stack_t **stack, unsigned int line_number);
 void op_pall(stack_t **stack, unsigned int line_number);
+void op_pint(stack_t **stack, unsigned int line_number);
 void free_stack(stack_t *stack);
 #endif /* MONTY_H */
