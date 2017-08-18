@@ -1,5 +1,9 @@
 #ifndef MONTY_H
 #define MONTY_H
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
  * @n: integer
@@ -29,4 +33,31 @@ typedef struct instruction_s
         char *opcode;
         void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
+
+/**
+ * struct global_s - variables set as global
+ * @line: pointer to the buffer allocated by getline()
+ *
+ * Description: global variables for all functions to access
+ */
+typedef struct global_s
+{
+	char *line; /* set getline buffer as global variable
+		     * so that op_push function can run strtok to access operand
+		     * need to be freed
+		     */
+	stack_t *stack;
+} global_t;
+
+/* this creates a "prototype" of the extern var of type global_t with the name "global" */
+extern global_t global; /* since it's global, no need to create a ptr to the
+			 * struct to pass between functions
+			 */
+
+void err_msg(char code, char *spec, unsigned int line_number);
+void (*get_op(char *s))(stack_t **stack, unsigned int line_number);
+stack_t *create_new_node(unsigned int line_number);
+void op_push(stack_t **stack, unsigned int line_number);
+void op_pall(stack_t **stack, unsigned int line_number);
+void free_stack(stack_t *stack);
 #endif /* MONTY_H */
