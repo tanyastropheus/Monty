@@ -32,15 +32,8 @@ void op_add(stack_t **stack, unsigned int line_number)
 
 void op_nop(stack_t **stack, unsigned int line_number)
 {
-	stack_t *temp;
-
+	(void)(stack);
 	(void)(line_number);
-	temp = *stack;
-	while (temp)
-	{
-		printf("%d\n", temp->n);
-		temp = temp->next;
-	}
 }
 
 /**
@@ -52,10 +45,19 @@ void op_nop(stack_t **stack, unsigned int line_number)
 
 void op_sub(stack_t **stack, unsigned int line_number)
 {
-	if (!*stack) /* if the stack is empty */
-		err_msg('R', NULL, line_number);
+	stack_t *temp;
+
+	if (!*stack || !(*stack)->next)
+		err_msg('U', NULL, line_number);
+
 	else
-		printf("%d\n", (*stack)->n);
+	{
+		(*stack)->next->n = (*stack)->next->n - (*stack)->n;
+		temp = *stack;
+		*stack = (*stack)->next;
+		(*stack)->prev = NULL;
+		free(temp);
+	}
 }
 
 /**
@@ -69,16 +71,19 @@ void op_div(stack_t **stack, unsigned int line_number)
 {
 	stack_t *temp;
 
-	if (!*stack) /* if the stack is empty */
-		err_msg('P', NULL, line_number);
+	if (!*stack || !(*stack)->next)
+		err_msg('D', NULL, line_number);
+	else if ((*stack)->n == 0)
+		err_msg('Z', NULL, line_number);
 	else
 	{
+		(*stack)->next->n = (*stack)->next->n / (*stack)->n;
 		temp = *stack;
 		*stack = (*stack)->next;
-		if (*stack) /* if there is more than one element on stack */
-			(*stack)->prev = NULL;
+		(*stack)->prev = NULL;
 		free(temp);
 	}
+
 }
 
 /**
@@ -90,15 +95,16 @@ void op_div(stack_t **stack, unsigned int line_number)
 
 void op_mul(stack_t **stack, unsigned int line_number)
 {
-	int num_1, num_2;
+	stack_t *temp;
 
 	if (!*stack || !(*stack)->next)
-		err_msg('S', NULL, line_number);
+		err_msg('T', NULL, line_number);
 	else
 	{
-		num_1 = (*stack)->n;
-		num_2 = (*stack)->next->n;
-		(*stack)->n = num_2;
-		(*stack)->next->n = num_1;
+		(*stack)->next->n = (*stack)->next->n * (*stack)->n;
+		temp = *stack;
+		*stack = (*stack)->next;
+		(*stack)->prev = NULL;
+		free(temp);
 	}
 }
