@@ -11,7 +11,7 @@ void op_add(stack_t **stack, unsigned int line_number)
 	stack_t *temp;
 
 	if (!*stack || !(*stack)->next)
-		err_msg('A', NULL, line_number);
+		err_message(ERR_ADD, NULL, line_number);
 
 	else
 	{
@@ -48,7 +48,7 @@ void op_sub(stack_t **stack, unsigned int line_number)
 	stack_t *temp;
 
 	if (!*stack || !(*stack)->next)
-		err_msg('U', NULL, line_number);
+		err_message(ERR_SUB, NULL, line_number);
 
 	else
 	{
@@ -72,9 +72,9 @@ void op_div(stack_t **stack, unsigned int line_number)
 	stack_t *temp;
 
 	if (!*stack || !(*stack)->next)
-		err_msg('D', NULL, line_number);
+		err_message(ERR_DIV, NULL, line_number);
 	else if ((*stack)->n == 0)
-		err_msg('Z', NULL, line_number);
+		err_message(ERR_ZERO, NULL, line_number);
 	else
 	{
 		(*stack)->next->n = (*stack)->next->n / (*stack)->n;
@@ -98,7 +98,7 @@ void op_mul(stack_t **stack, unsigned int line_number)
 	stack_t *temp;
 
 	if (!*stack || !(*stack)->next)
-		err_msg('T', NULL, line_number);
+		err_message(ERR_MUL, NULL, line_number);
 	else
 	{
 		(*stack)->next->n = (*stack)->next->n * (*stack)->n;

@@ -14,11 +14,11 @@ stack_t *create_new_node(unsigned int line_number)
 
 	new = malloc(sizeof(stack_t));
 	if (!new)
-		err_msg('M', NULL, 0);
+		err_message(ERR_MALLOC, NULL, 0);
 	operand = strtok(NULL, "\n\r\t ");
 	op_num = strtol(operand, &end, 10);
 	if (*end) /* operand is not a num & can't be converted */
-		err_msg('I', NULL, line_number);
+		err_message(ERR_INT, NULL, line_number);
 	new->n = op_num;
 	return (new);
 }

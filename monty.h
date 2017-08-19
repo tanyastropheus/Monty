@@ -56,7 +56,42 @@ extern global_t global;  /**
 			  * to the struct to pass b/w functions
 			  */
 
-void err_msg(char code, char *spec, unsigned int line_number);
+/**
+ * enum err_code - error code to print out appropriate error messages
+ * @ERR_FILE: missing file or more than 1 file
+ * @ERR_OPEN: file fails to open
+ * @ERR_INVAL: opcode invalid
+ * @ERR_INT: operand to push is not an integer
+ * @ERR_PINT: stack empty when executing opcode pint
+ * @ERR_POP: stack empty when executing opcode pop
+ * @ERR_SWAP: less than two elements on stack when executing opcode swap
+ * @ERR_ADD: less than two elements on stack when executing opcode add
+ * @ERR_SUB: less than two elements on stack when executing opcode sub
+ * @ERR_DIV: less than two elements on stack when executing opcode div
+ * @ERR_ZERO: divided by 0 when executing opcode div/mod
+ * @ERR_MUL: less than two elements on stack when executing opcode mul
+ * @ERR_MOD: less than two elements on stack when executing opcode mod
+ */
+
+enum err_code
+{
+	ERR_FILE,
+	ERR_OPEN,
+	ERR_INVAL,
+	ERR_INT,
+	ERR_MALLOC,
+	ERR_PINT,
+	ERR_POP,
+	ERR_SWAP,
+	ERR_ADD,
+	ERR_SUB,
+	ERR_DIV,
+	ERR_ZERO,
+	ERR_MUL,
+	ERR_MOD
+};
+
+void err_message(enum err_code code, char *spec, unsigned int line_number);
 void (*get_op(char *s))(stack_t **stack, unsigned int line_number);
 stack_t *create_new_node(unsigned int line_number);
 void op_push(stack_t **stack, unsigned int line_number);

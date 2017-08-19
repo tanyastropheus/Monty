@@ -54,7 +54,7 @@ void op_pall(stack_t **stack, unsigned int line_number)
 void op_pint(stack_t **stack, unsigned int line_number)
 {
 	if (!*stack) /* if the stack is empty */
-		err_msg('R', NULL, line_number);
+		err_message(ERR_PINT, NULL, line_number);
 	else
 		printf("%d\n", (*stack)->n);
 }
@@ -71,7 +71,7 @@ void op_pop(stack_t **stack, unsigned int line_number)
 	stack_t *temp;
 
 	if (!*stack) /* if the stack is empty */
-		err_msg('P', NULL, line_number);
+		err_message(ERR_POP, NULL, line_number);
 	else
 	{
 		temp = *stack;
@@ -94,7 +94,7 @@ void op_swap(stack_t **stack, unsigned int line_number)
 	int num_1, num_2;
 
 	if (!*stack || !(*stack)->next)
-		err_msg('S', NULL, line_number);
+		err_message(ERR_SWAP, NULL, line_number);
 	else
 	{
 		num_1 = (*stack)->n;

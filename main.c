@@ -19,10 +19,10 @@ int main(int ac, char *av[])
 	void (*fp)(stack_t **stack, unsigned int line_number);
 
 	if (ac != 2) /* if no file is given, or more than one argv */
-		err_msg('F', NULL, 0);
+		err_message(ERR_FILE, NULL, 0);
 	fd = fopen(av[1], "r");
 	if (!fd)
-		err_msg('O', av[1], 0);
+		err_message(ERR_OPEN, av[1], 0);
 
 	line_number = 1;
 	line = NULL;
@@ -35,7 +35,7 @@ int main(int ac, char *av[])
 		{
 			fp = get_op(op_code);
 			if (fp == NULL)  /* bytecode invalid */
-				err_msg('B', op_code, line_number);
+				err_message(ERR_INVAL, op_code, line_number);
 			fp(&(global.stack), line_number);
 		}
 		line_number++;
