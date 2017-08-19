@@ -93,7 +93,7 @@ void op_swap(stack_t **stack, unsigned int line_number)
 {
 	int num_1, num_2;
 
-	if (!(*stack)->n || ! *stack)
+	if (!*stack || !(*stack)->next)
 		err_msg('S', NULL, line_number);
 	else
 	{
