@@ -62,6 +62,7 @@ extern global_t global;  /**
  * @ERR_OPEN: file fails to open
  * @ERR_INVAL: opcode invalid
  * @ERR_INT: operand to push is not an integer
+ * @ERR_MALLOC: malloc() failed
  * @ERR_PINT: stack empty when executing opcode pint
  * @ERR_POP: stack empty when executing opcode pop
  * @ERR_SWAP: less than two elements on stack when executing opcode swap

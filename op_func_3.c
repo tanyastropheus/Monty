@@ -1,7 +1,7 @@
 #include "monty.h"
 /**
  * op_mod - find the remainder of the 2nd top element of the stack divided by
- the top element
+ * the top element
  * @stack: address to the pointer to the top of the stack, or the head node
  * @line_number: line number of the bytecode file
  * Return: Void

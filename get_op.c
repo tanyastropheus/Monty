@@ -19,8 +19,8 @@ void (*get_op(char *s))(stack_t **stack, unsigned int line_number)
 		{"sub", op_sub},
 		{"div", op_div},
 		{"mul", op_mul},
-/*		{"mod", op_mod},
-*/		{NULL, NULL},
+		{"mod", op_mod},
+		{NULL, NULL},
 	};
 
 	i = 0;

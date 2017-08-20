@@ -9,7 +9,7 @@
 
 void err_message(enum err_code code, char *spec, unsigned int line_number)
 {
-	char *err_msg[] = {
+	static const char * const err_msg[] = {
 		"Usage: monty file",
 		"Error: Can't open file",
 		"unknown instruction",
