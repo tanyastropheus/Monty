@@ -35,7 +35,10 @@ void err_message(enum err_code code, char *spec, unsigned int line_number)
 	else
 		printf("L%u:%s %s\n", line_number, err_msg[code], spec);
 	free_stack(global.stack);
-	fclose(global.fptr);
-	free(global.line);
+	if (global.fptr)
+	{
+		fclose(global.fptr);
+		free(global.line);
+	}
 	exit(EXIT_FAILURE);
 }
