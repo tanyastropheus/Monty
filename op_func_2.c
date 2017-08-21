@@ -8,8 +8,6 @@
 
 void op_add(stack_t **stack, unsigned int line_number)
 {
-	stack_t *temp;
-
 	if (!*stack || !(*stack)->next)
 		err_message(ERR_ADD, NULL, line_number);
 
@@ -42,8 +40,6 @@ void op_nop(stack_t **stack, unsigned int line_number)
 
 void op_sub(stack_t **stack, unsigned int line_number)
 {
-	stack_t *temp;
-
 	if (!*stack || !(*stack)->next)
 		err_message(ERR_SUB, NULL, line_number);
 
@@ -63,8 +59,6 @@ void op_sub(stack_t **stack, unsigned int line_number)
 
 void op_div(stack_t **stack, unsigned int line_number)
 {
-	stack_t *temp;
-
 	if (!*stack || !(*stack)->next)
 		err_message(ERR_DIV, NULL, line_number);
 	else if ((*stack)->n == 0)
@@ -86,8 +80,6 @@ void op_div(stack_t **stack, unsigned int line_number)
 
 void op_mul(stack_t **stack, unsigned int line_number)
 {
-	stack_t *temp;
-
 	if (!*stack || !(*stack)->next)
 		err_message(ERR_MUL, NULL, line_number);
 	else
