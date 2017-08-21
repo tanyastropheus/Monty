@@ -6,12 +6,10 @@
  * Return: 0 if successful
  */
 
-global_t global = {NULL, NULL};
+global_t global = {NULL, NULL, NULL, NULL};
 
 int main(int ac, char *av[])
 {
-	FILE *fd;
-	char *line;
 	ssize_t r_count;
 	size_t size;
 	char *op_code;
@@ -20,15 +18,14 @@ int main(int ac, char *av[])
 
 	if (ac != 2) /* if no file is given, or more than one argv */
 		err_message(ERR_FILE, NULL, 0);
-	fd = fopen(av[1], "r");
-	if (!fd)
+	global.fptr = fopen(av[1], "r");
+	if (!(global.fptr))
 		err_message(ERR_OPEN, av[1], 0);
 
 	line_number = 1;
-	line = NULL;
-	while ((r_count = getline(&line, &size, fd)) != -1)
+	while ((r_count = getline(&(global.line), &size, global.fptr)) != -1)
 	{
-		op_code = strtok(line, "\n\t\r "); /* 1st time, returns ptr to opcode */
+		op_code = strtok(global.line, "\n\t\r "); /* 1st time, returns ptr to opcode */
 		if (!op_code) /* if the line is empty */
 			;
 		else
@@ -40,8 +37,8 @@ int main(int ac, char *av[])
 		}
 		line_number++;
 	}
-	fclose(fd);
-	free(line);
+	fclose(global.fptr);
+	free(global.line);
 	free_stack(global.stack);
 	return (0);  /* getline returns -1 on the first run
 		      * while loop doesn't execute

@@ -16,10 +16,7 @@ void op_add(stack_t **stack, unsigned int line_number)
 	else
 	{
 		(*stack)->next->n = (*stack)->next->n + (*stack)->n;
-		temp = *stack;
-		*stack = (*stack)->next;
-		(*stack)->prev = NULL;
-		free(temp);
+		op_pop(stack, line_number);
 	}
 }
 
@@ -53,10 +50,7 @@ void op_sub(stack_t **stack, unsigned int line_number)
 	else
 	{
 		(*stack)->next->n = (*stack)->next->n - (*stack)->n;
-		temp = *stack;
-		*stack = (*stack)->next;
-		(*stack)->prev = NULL;
-		free(temp);
+		op_pop(stack, line_number);
 	}
 }
 
@@ -78,10 +72,7 @@ void op_div(stack_t **stack, unsigned int line_number)
 	else
 	{
 		(*stack)->next->n = (*stack)->next->n / (*stack)->n;
-		temp = *stack;
-		*stack = (*stack)->next;
-		(*stack)->prev = NULL;
-		free(temp);
+		op_pop(stack, line_number);
 	}
 
 }
@@ -102,9 +93,6 @@ void op_mul(stack_t **stack, unsigned int line_number)
 	else
 	{
 		(*stack)->next->n = (*stack)->next->n * (*stack)->n;
-		temp = *stack;
-		*stack = (*stack)->next;
-		(*stack)->prev = NULL;
-		free(temp);
+		op_pop(stack, line_number);
 	}
 }

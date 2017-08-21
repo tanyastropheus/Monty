@@ -1,5 +1,6 @@
 #ifndef MONTY_H
 #define MONTY_H
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -46,6 +47,8 @@ typedef struct global_s
 		     * so that op_push function can run strtok to access operand
 		     * need to be freed
 		     */
+	FILE *fptr;
+	size_t *n;
 	stack_t *stack;
 } global_t;
 
