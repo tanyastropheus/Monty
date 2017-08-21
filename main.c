@@ -6,7 +6,7 @@
  * Return: 0 if successful
  */
 
-global_t global = {NULL, NULL, NULL, NULL};
+global_t global = {NULL, NULL, NULL};
 
 int main(int ac, char *av[])
 {
@@ -25,7 +25,7 @@ int main(int ac, char *av[])
 	line_number = 1;
 	while ((r_count = getline(&(global.line), &size, global.fptr)) != -1)
 	{
-		op_code = strtok(global.line, "\n\t\r "); /* 1st time, returns ptr to opcode */
+		op_code = strtok(global.line, "\n\t\r ");
 		if (!op_code) /* if the line is empty */
 			;
 		else

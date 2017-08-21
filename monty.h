@@ -38,6 +38,7 @@ typedef struct instruction_s
 /**
  * struct global_s - variables set as global
  * @line: pointer to the buffer allocated by getline()
+ * @fptr: pointer to FILE datatype
  * @stack: doubly linked list that serves as the stack
  * Description: global variables for all functions to access
  */
@@ -48,7 +49,6 @@ typedef struct global_s
 		     * need to be freed
 		     */
 	FILE *fptr;
-	size_t *n;
 	stack_t *stack;
 } global_t;
 
