@@ -10,7 +10,7 @@
 void err_message(enum err_code code, char *spec, unsigned int line_number)
 {
 	static const char * const err_msg[] = {
-		"Usage: monty file",
+		"USAGE: monty file",
 		"Error: Can't open file",
 		"unknown instruction",
 		"usage: push integer",
@@ -33,7 +33,7 @@ void err_message(enum err_code code, char *spec, unsigned int line_number)
 	else if (!spec)
 		printf("L%u: %s\n", line_number, err_msg[code]);
 	else
-		printf("L%u:%s %s\n", line_number, err_msg[code], spec);
+		printf("L%u: %s %s\n", line_number, err_msg[code], spec);
 	free_stack(global.stack);
 	if (global.fptr)
 	{
