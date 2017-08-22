@@ -16,7 +16,7 @@ void err_message(enum err_code code, char *spec, unsigned int line_number)
 		"usage: push integer",
 		"Error: malloc failed",
 		"can't pint, stack empty",
-		"pop an empty stack",
+		"can't pop an empty stack",
 		"can't swap, stack too short",
 		"can't add, stack too short",
 		"can't sub, stack too short",
