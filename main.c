@@ -1,12 +1,13 @@
 #include "monty.h"
+
+global_t global = {NULL, NULL, NULL};
+
 /**
  * main - interpreter for Monty bytecode files
  * @ac: number of commandline arguments, including the filename
  * @av: array of pointers to the commandine arguments
  * Return: 0 if successful
  */
-
-global_t global = {NULL, NULL, NULL};
 
 int main(int ac, char *av[])
 {
